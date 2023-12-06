@@ -44,3 +44,9 @@ def cli_runner(daffodil_path: str) -> cli_runner_wrapper:
 def schemas() -> {str: str}:
     schema_path = os.path.join(_ROOT_PATH, "data\\schemas")
     return {file.split(".")[0]: os.path.join(schema_path, file) for file in os.listdir(schema_path)}
+
+
+@pytest.fixture
+def data_files() -> {str: str}:
+    data_file_path = os.path.join(_ROOT_PATH, "data\\data_files")
+    return {file.split(".")[0]: os.path.join(data_file_path, file) for file in os.listdir(data_file_path)}
