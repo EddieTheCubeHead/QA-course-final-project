@@ -6,10 +6,19 @@ from typing import Callable
 import pytest
 
 
+_ROOT_PATH = os.path.dirname(os.path.dirname(__file__))
+
+
 @dataclass
 class CliRunResult:
     stdout: str
     stderr: str
+
+
+class OutputHelper:
+
+    def __init__(self, output_folder: str):
+        self._output_folder = output_folder
 
 
 cli_runner_wrapper = Callable[[(str, ...)], CliRunResult]
@@ -17,8 +26,7 @@ cli_runner_wrapper = Callable[[(str, ...)], CliRunResult]
 
 @pytest.fixture
 def daffodil_path() -> str:
-    root_path = os.path.dirname(os.path.dirname(__file__))
-    return os.path.join(root_path, "daffodil-src\\bin\\daffodil")
+    return os.path.join(_ROOT_PATH, "daffodil-src\\bin\\daffodil")
 
 
 @pytest.fixture
@@ -30,3 +38,9 @@ def cli_runner(daffodil_path: str) -> cli_runner_wrapper:
         return CliRunResult(cleaned_stdout, cleaned_stderr)
 
     return wrapper
+
+
+@pytest.fixture
+def schemas() -> {str: str}:
+    schema_path = os.path.join(_ROOT_PATH, "data\\schemas")
+    return {file.split(".")[0]: os.path.join(schema_path, file) for file in os.listdir(schema_path)}
