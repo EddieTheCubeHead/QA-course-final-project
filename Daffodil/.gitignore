@@ -1,2 +1,4 @@
+daffodil-src/
 .idea/
-**/target/
+**/__pycache__/j
+venv/
