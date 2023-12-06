@@ -1,4 +1,5 @@
 import json
+import csv
 import xml.etree.ElementTree as ET
 from models import File, RecordData
 
@@ -54,3 +55,23 @@ def should_unparse_csv_to_xml(cli_runner: cli_runner_wrapper, schemas: {str: str
         generated_content = output_file.read().replace('\r\n', '\n')
         expected_content = expected_file.read().replace('\r\n', '\n')
     assert generated_content == expected_content
+
+    
+def should_convert_csv_to_json_csvlib(cli_runner: cli_runner_wrapper, schemas: {str: str}, data_files: {str: str}):
+    
+    csv_schema = schemas["csv"]
+    data_file_path = data_files["basic.csv"]
+    
+
+    result = json.loads(cli_runner('parse',f'--schema', csv_schema, data_file_path, '-I', 'json').stdout)
+    file_data = File(**result)
+    records = file_data.file.record
+    with open(data_file_path) as f:
+        reader = csv.DictReader(f)
+        item_index = 0
+        for row in reader:
+            field_index = 0
+            for field in reader.fieldnames:
+                assert records[item_index].item[field_index] == row[field]
+                field_index += 1
+            item_index += 1
