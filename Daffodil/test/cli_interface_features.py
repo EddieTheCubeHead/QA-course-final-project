@@ -1,4 +1,5 @@
 import json
+import csv
 import xml.etree.ElementTree as ET
 from models import File
 
@@ -30,3 +31,23 @@ def should_should_convert_csv_to_json(cli_runner: cli_runner_wrapper, schemas: {
     assert records[0].item[0] == "smith"
     assert records[1].item[1] == "john"
     # assert result == {'file': {'header': {'title': ['last', 'first', 'middle', 'DOB']}, 'record': [{'item': ['smith', 'robert', 'brandon', '1988-03-24']}, {'item': ['johnson', 'john', 'henry', '1986-01-23']}]}}
+
+def should_convert_csv_to_json_csvlib(cli_runner: cli_runner_wrapper, schemas: {str: str}, data_files: {str: str}):
+    
+    csv_schema = schemas["csv"]
+    data_file_path = data_files["basic.csv"]
+    
+
+    result = json.loads(cli_runner('parse',f'--schema', csv_schema, data_file_path, '-I', 'json').stdout)
+    file_data = File(**result)
+    records = file_data.file.record
+    with open(data_file_path) as f:
+        reader = csv.DictReader(f)
+        item_index = 0
+        for row in reader:
+            field_index = 0
+            for field in reader.fieldnames:
+                print(field_index)
+                assert records[item_index].item[field_index] == row[field]
+                field_index += 1
+            item_index += 1
