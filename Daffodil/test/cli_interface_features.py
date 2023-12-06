@@ -21,7 +21,7 @@ def should_convert_csv_to_xml(cli_runner: cli_runner_wrapper, schemas: {str: str
     parsed_xml = ET.fromstring(result)
     assert parsed_xml.tag == '{http://example.com}file'
     assert len(parsed_xml.findall('header/title')) == 4
-    assert len(parsed_xml.findall('record')) == 2
+    assert len(parsed_xml.findall('record')) == 3
 
     records = []
     for record in parsed_xml.findall('record'):
@@ -40,3 +40,17 @@ def should_convert_csv_to_json(cli_runner: cli_runner_wrapper, schemas: {str: st
     assert records[0].item[0] == "smith"
     assert records[1].item[1] == "john"
     # assert result == {'file': {'header': {'title': ['last', 'first', 'middle', 'DOB']}, 'record': [{'item': ['smith', 'robert', 'brandon', '1988-03-24']}, {'item': ['johnson', 'john', 'henry', '1986-01-23']}]}}
+
+
+def should_unparse_csv_to_xml(cli_runner: cli_runner_wrapper, schemas: {str: str}, data_files: {str: str}, data_output_files: {str:str}):
+    csv_schema = schemas["csv"]
+    data_file_path = data_files["basic.csv"]
+    xml_output_path = data_output_files["test.xml"]
+    csv_output_path = data_output_files["test.csv"]
+    cli_runner('parse',f'--schema', csv_schema, data_file_path, '-o', xml_output_path,  '-I', 'xml')
+    cli_runner('unparse',f'--schema', csv_schema, xml_output_path, '-o', csv_output_path, '-I', 'xml')
+
+    with open(csv_output_path, 'r', newline='') as output_file, open(data_file_path, 'r', newline='') as expected_file:
+        generated_content = output_file.read().replace('\r\n', '\n')
+        expected_content = expected_file.read().replace('\r\n', '\n')
+    assert generated_content == expected_content
