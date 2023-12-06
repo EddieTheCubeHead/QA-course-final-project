@@ -1,5 +1,6 @@
 import json
 import csv
+import os
 import xml.etree.ElementTree as ET
 from models import File, RecordData
 
@@ -43,11 +44,11 @@ def should_convert_csv_to_json(cli_runner: cli_runner_wrapper, schemas: {str: st
     # assert result == {'file': {'header': {'title': ['last', 'first', 'middle', 'DOB']}, 'record': [{'item': ['smith', 'robert', 'brandon', '1988-03-24']}, {'item': ['johnson', 'john', 'henry', '1986-01-23']}]}}
 
 
-def should_unparse_csv_to_xml(cli_runner: cli_runner_wrapper, schemas: {str: str}, data_files: {str: str}, data_output_files: {str:str}):
+def should_unparse_csv_to_xml(cli_runner: cli_runner_wrapper, schemas: {str: str}, data_files: {str: str}, data_output_directory: str):
     csv_schema = schemas["csv"]
     data_file_path = data_files["basic.csv"]
-    xml_output_path = data_output_files["test.xml"]
-    csv_output_path = data_output_files["test.csv"]
+    xml_output_path = os.path.join(data_output_directory, "test.xml")
+    csv_output_path = os.path.join(data_output_directory, "test.csv")
     cli_runner('parse',f'--schema', csv_schema, data_file_path, '-o', xml_output_path,  '-I', 'xml')
     cli_runner('unparse',f'--schema', csv_schema, xml_output_path, '-o', csv_output_path, '-I', 'xml')
 

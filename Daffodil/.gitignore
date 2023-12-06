@@ -3,3 +3,4 @@ daffodil-src/
 __pycache__/
 venv/
 .pytest_cache/
+data/data_output_files/

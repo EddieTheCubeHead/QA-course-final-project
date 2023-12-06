@@ -51,7 +51,18 @@ def data_files() -> {str: str}:
     data_file_path = os.path.join(_ROOT_PATH, "data\\data_files")
     return {file: os.path.join(data_file_path, file) for file in os.listdir(data_file_path)}
 
-@pytest.fixture
-def data_output_files() -> {str: str}:
+
+def _clean_directory(directory_path: str):
+    for file in os.listdir(directory_path):
+        os.remove(os.path.join(directory_path, file))
+
+
+@pytest.fixture(scope="session")
+def data_output_directory() -> str:
     data_file_path = os.path.join(_ROOT_PATH, "data\\data_output_files")
-    return {file: os.path.join(data_file_path, file) for file in os.listdir(data_file_path)}
+    if not os.path.exists(data_file_path):
+        os.makedirs(data_file_path)
+    _clean_directory(data_file_path)
+    yield data_file_path
+    _clean_directory(data_file_path)
+
