@@ -13,7 +13,7 @@ def should_print_error_if_ran_without_args(cli_runner: cli_runner_wrapper):
     result = cli_runner()
     assert result.stderr == "[error] Subcommand required"
 
-def should_should_convert_csv_to_xml(cli_runner: cli_runner_wrapper, schemas: {str: str}, data_files: {str: str}):
+def should_convert_csv_to_xml(cli_runner: cli_runner_wrapper, schemas: {str: str}, data_files: {str: str}):
     csv_schema = schemas["csv"]
     data_file_path = data_files["basic.csv"]
     result = cli_runner('parse',f'--schema', csv_schema, data_file_path, '-I', 'xml').stdout
@@ -31,7 +31,7 @@ def should_should_convert_csv_to_xml(cli_runner: cli_runner_wrapper, schemas: {s
     assert records[1].item[1] == "john"
     
     
-def should_should_convert_csv_to_json(cli_runner: cli_runner_wrapper, schemas: {str: str}, data_files: {str: str}):
+def should_convert_csv_to_json(cli_runner: cli_runner_wrapper, schemas: {str: str}, data_files: {str: str}):
     csv_schema = schemas["csv"]
     data_file_path = data_files["basic.csv"]
     result = json.loads(cli_runner('parse',f'--schema', csv_schema, data_file_path, '-I', 'json').stdout)
