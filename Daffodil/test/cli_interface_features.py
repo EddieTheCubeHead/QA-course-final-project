@@ -1,5 +1,7 @@
-from conftest import cli_runner_wrapper
+import json
+import xml.etree.ElementTree as ET
 
+from conftest import cli_runner_wrapper
 
 def should_print_version_when_version_argument_supplied(cli_runner: cli_runner_wrapper):
     result = cli_runner("--version")
@@ -9,3 +11,18 @@ def should_print_version_when_version_argument_supplied(cli_runner: cli_runner_w
 def should_print_error_if_ran_without_args(cli_runner: cli_runner_wrapper):
     result = cli_runner()
     assert result.stderr == "[error] Subcommand required"
+
+def should_should_convert_csv_to_xml(cli_runner: cli_runner_wrapper, schemas: {str: str}, data_files: {str: str}):
+    csv_schema = schemas["csv"]
+    data_file_path = data_files["basic.csv"]
+    result = cli_runner('parse',f'--schema', csv_schema, data_file_path, '-I', 'xml').stdout
+    breakpoint()
+    parsed_xml = ET.fromstring(result)
+    assert parsed_xml.tag == 'file'
+    # assert result.stdout == "[error] Subcommand required"
+    
+def should_should_convert_csv_to_json(cli_runner: cli_runner_wrapper, schemas: {str: str}, data_files: {str: str}):
+    csv_schema = schemas["csv"]
+    data_file_path = data_files["basic.csv"]
+    result = json.loads(cli_runner('parse',f'--schema', csv_schema, data_file_path, '-I', 'json').stdout)
+    assert result == {'file': {'header': {'title': ['last', 'first', 'middle', 'DOB']}, 'record': [{'item': ['smith', 'robert', 'brandon', '1988-03-24']}, {'item': ['johnson', 'john', 'henry', '1986-01-23']}]}}
