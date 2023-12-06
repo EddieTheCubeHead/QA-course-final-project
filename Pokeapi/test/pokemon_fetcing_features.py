@@ -2,8 +2,9 @@ import json
 
 import requests
 
+from models import Pokemon
 
-def should_fetch_something():
+
+def should_get_data_in_the_correct_model():
     request = requests.get("https://pokeapi.co/api/v2/pokemon/ditto")
-    print(json.loads(request.content.decode(encoding="utf-8")))
-
+    Pokemon(**json.loads(request.content.decode(encoding="utf-8")))
