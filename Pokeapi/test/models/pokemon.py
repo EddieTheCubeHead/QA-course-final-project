@@ -1,19 +1,12 @@
 from pydantic import BaseModel
 
-
-class NamedAPIResource(BaseModel):
-    name: str
-    url: str
+from models.common import NamedAPIResource
 
 
 class PokemonAbility(BaseModel):
     is_hidden: bool
     slot: int
     ability: NamedAPIResource
-
-
-class PokemonForm(NamedAPIResource):
-    pass
 
 
 class VersionGameIndex(BaseModel):
@@ -83,7 +76,7 @@ class Pokemon(BaseModel):
     stats: list[PokemonStat]
     types: list[PokemonType]
     abilities: list[PokemonAbility]
-    forms: list[PokemonForm]
+    forms: list[NamedAPIResource]
     game_indices: list[VersionGameIndex]
     held_items: list[PokemonHeldItem]
     moves: list[PokemonMove]
