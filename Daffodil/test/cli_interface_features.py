@@ -57,7 +57,6 @@ def should_convert_csv_to_json_csvlib(cli_runner: cli_runner_wrapper, schemas: {
         for row in reader:
             field_index = 0
             for field in reader.fieldnames:
-                print(field_index)
                 assert records[item_index].item[field_index] == row[field]
                 field_index += 1
             item_index += 1
