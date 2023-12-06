@@ -49,4 +49,4 @@ def schemas() -> {str: str}:
 @pytest.fixture
 def data_files() -> {str: str}:
     data_file_path = os.path.join(_ROOT_PATH, "data\\data_files")
-    return {file.split(".")[0]: os.path.join(data_file_path, file) for file in os.listdir(data_file_path)}
+    return {file: os.path.join(data_file_path, file) for file in os.listdir(data_file_path)}
