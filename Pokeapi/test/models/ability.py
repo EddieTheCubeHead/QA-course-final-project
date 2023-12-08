@@ -1,30 +1,31 @@
 from pydantic import BaseModel
 
-from models.common import NamedAPIResource, Name, VerboseEffect, Effect
+from models.common import NamedApiResource, Name, VerboseEffect, Effect
+from models.fetchable import Fetchable
 
 
 class AbilityEffectChange(BaseModel):
     effect_entries: list[Effect]
-    version_group: NamedAPIResource
+    version_group: NamedApiResource
 
 
 class AbilityFlavorText(BaseModel):
     flavor_text: str
-    language: NamedAPIResource
-    version_group: NamedAPIResource
+    language: NamedApiResource
+    version_group: NamedApiResource
 
 
 class AbilityPokemon(BaseModel):
     is_hidden: bool
     slot: int
-    pokemon: NamedAPIResource
+    pokemon: NamedApiResource
 
 
-class Ability(BaseModel):
+class Ability(Fetchable):
     id: int
     name: str
     is_main_series: bool
-    generation: NamedAPIResource
+    generation: NamedApiResource
     names: list[Name]
     effect_entries: list[VerboseEffect]
     effect_changes: list[AbilityEffectChange]

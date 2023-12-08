@@ -1,19 +1,19 @@
 from pydantic import BaseModel
 
 
-class NamedAPIResource(BaseModel):
+class NamedApiResource(BaseModel):
     name: str
     url: str
 
 
 class Name(BaseModel):
     name: str
-    language: NamedAPIResource
+    language: NamedApiResource
 
 
 class Effect(BaseModel):
     effect: str
-    language: NamedAPIResource
+    language: NamedApiResource
 
 
 class VerboseEffect(Effect):

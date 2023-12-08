@@ -1,11 +1,6 @@
-import datetime
-import functools
-import json
 import os
 
 import pytest
-import requests
-from pydantic import BaseModel
 
 from utils.api_client import PokeApiClient
 from utils.link_walker import LinkWalker

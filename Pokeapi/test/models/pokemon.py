@@ -1,37 +1,38 @@
 from pydantic import BaseModel
 
-from models.common import NamedAPIResource
+from models.common import NamedApiResource
+from models.fetchable import Fetchable
 
 
 class PokemonAbility(BaseModel):
     is_hidden: bool
     slot: int
-    ability: NamedAPIResource
+    ability: NamedApiResource
 
 
 class VersionGameIndex(BaseModel):
-    version: NamedAPIResource
+    version: NamedApiResource
     game_index: int
 
 
 class PokemonHeldItemVersion(BaseModel):
-    version: NamedAPIResource
+    version: NamedApiResource
     rarity: int
 
 
 class PokemonHeldItem(BaseModel):
-    item: NamedAPIResource
+    item: NamedApiResource
     version_details: list[PokemonHeldItemVersion]
 
 
 class PokemonMoveVersion(BaseModel):
-    move_learn_method: NamedAPIResource
-    version_group: NamedAPIResource
+    move_learn_method: NamedApiResource
+    version_group: NamedApiResource
     level_learned_at: int
 
 
 class PokemonMove(BaseModel):
-    move: NamedAPIResource
+    move: NamedApiResource
     version_group_details: list[PokemonMoveVersion]
 
 
@@ -47,22 +48,22 @@ class PokemonSprites(BaseModel):
 
 
 class PokemonStat(BaseModel):
-    stat: NamedAPIResource
+    stat: NamedApiResource
     effort: int
     base_stat: int
 
 
 class PokemonType(BaseModel):
     slot: int
-    type: NamedAPIResource
+    type: NamedApiResource
 
 
 class PokemonTypePast(BaseModel):
-    generation: NamedAPIResource
+    generation: NamedApiResource
     types: list[PokemonType]
 
 
-class Pokemon(BaseModel):
+class Pokemon(Fetchable):
     id: int
     name: str
     base_experience: int
@@ -72,11 +73,11 @@ class Pokemon(BaseModel):
     weight: int
     location_area_encounters: str
     sprites: PokemonSprites
-    species: NamedAPIResource
+    species: NamedApiResource
     stats: list[PokemonStat]
     types: list[PokemonType]
     abilities: list[PokemonAbility]
-    forms: list[NamedAPIResource]
+    forms: list[NamedApiResource]
     game_indices: list[VersionGameIndex]
     held_items: list[PokemonHeldItem]
     moves: list[PokemonMove]
