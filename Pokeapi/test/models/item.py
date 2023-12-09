@@ -16,7 +16,7 @@ class ItemHolderPokemonVersionDetails(BaseModel):
 
 class ItemHolderPokemon(BaseModel):
     pokemon: NamedApiResource
-    version_details: ItemHolderPokemonVersionDetails
+    version_details: list[ItemHolderPokemonVersionDetails]
 
 
 class Item(Fetchable):
