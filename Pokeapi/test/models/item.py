@@ -22,7 +22,7 @@ class ItemHolderPokemon(BaseModel):
 class Item(Fetchable):
     name: str
     cost: int
-    fling_power: int
+    fling_power: int | None
     fling_effect: NamedApiResource | None
     attributes: list[NamedApiResource]
     category: NamedApiResource
