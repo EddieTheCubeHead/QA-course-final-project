@@ -15,7 +15,7 @@ class ObjectFetchingFeatures:
         results = typed_client.get_all()
         assert results is not None, f"Could not get a list of resources for route {typed_client.route_name}"
 
-    def should_get_ability_data_in_the_correct_model(self, typed_client: TypedPokeApiClient):
+    def should_return_resource_data_in_the_correct_model(self, typed_client: TypedPokeApiClient):
         resource_id = typed_client.get_random_id()
         typed_client.get_typed(resource_id)
 
@@ -39,7 +39,7 @@ class NamelessObjectFetchingFeatures:
         results = nameless_client.get_all()
         assert results is not None, f"Could not get a list of resources for route {nameless_client.route_name}"
 
-    def should_get_type_data_in_the_correct_model(self, nameless_client: TypedPokeApiClient):
+    def should_return_resource_data_in_the_correct_model(self, nameless_client: TypedPokeApiClient):
         resource_id = nameless_client.get_random_id()
         nameless_client.get_typed(resource_id)
 
