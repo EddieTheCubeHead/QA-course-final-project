@@ -65,3 +65,17 @@ class GenerationGameIndex(BaseModel):
 class MachineVersionDetail(BaseModel):
     machine: ApiResource
     version_group: NamedApiResource
+
+
+class Encounter(BaseModel):
+    min_level: int
+    max_level: int
+    condition_values: list[NamedApiResource]
+    chance: int
+    method: NamedApiResource
+
+
+class VersionEncounterDetail(BaseModel):
+    version: NamedApiResource
+    max_chance: int
+    encounter_details: list[Encounter]
