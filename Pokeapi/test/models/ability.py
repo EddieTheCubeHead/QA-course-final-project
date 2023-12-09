@@ -22,7 +22,6 @@ class AbilityPokemon(BaseModel):
 
 
 class Ability(Fetchable):
-    id: int
     name: str
     is_main_series: bool
     generation: NamedApiResource

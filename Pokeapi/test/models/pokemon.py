@@ -64,7 +64,6 @@ class PokemonTypePast(BaseModel):
 
 
 class Pokemon(Fetchable):
-    id: int
     name: str
     base_experience: int | None
     height: int

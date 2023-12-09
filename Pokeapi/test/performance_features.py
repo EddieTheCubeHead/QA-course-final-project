@@ -16,12 +16,12 @@ async def fetch(session: aiohttp.ClientSession, url: str):
 
 
 # noinspection PyMethodMayBeStatic
-@pytest.mark.skipif(os.getenv("SKIP_LONG", default=None) is not None, reason="Skipped long test")
 @pytest.mark.skipif("127.0.0.1" not in os.getenv("POKEAPI_URL", default="false"),
                     reason="Only run stress test against proxy to not overstress Pokeapi servers")
 @pytest.mark.parametrize("typed_client", FETCHABLE_TYPES, indirect=True)
 class PerformanceFeatures:
 
+    @pytest.mark.skipif(os.getenv("SKIP_LONG", default=None) is not None, reason="Skipped long test")
     async def should_handle_thousand_requests_for_type_instance_in_ten_seconds(self, typed_client: TypedPokeApiClient,
                                                                                timer: Timer):
         async with aiohttp.ClientSession() as session:

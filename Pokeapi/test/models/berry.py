@@ -10,7 +10,6 @@ class BerryFlavorMap(BaseModel):
 
 
 class Berry(Fetchable):
-    id: int
     name: str
     growth_time: int
     max_harvest: int
