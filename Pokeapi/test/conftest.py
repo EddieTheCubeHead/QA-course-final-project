@@ -8,6 +8,7 @@ from models.berry_firmness import BerryFirmness
 from models.berry_flavor import BerryFlavor
 from models.contest_effect import ContestEffect
 from models.contest_type import ContestType
+from models.encounter_condition import EncounterCondition
 from models.encounter_method import EncounterMethod
 from models.pokemon import Pokemon
 from models.super_contest_effect import SuperContestEffect
@@ -16,7 +17,8 @@ from utils.link_walker import LinkWalker
 from utils.timer import Timer
 
 
-FETCHABLE_TYPES = (Berry, BerryFirmness, BerryFlavor, ContestType, EncounterMethod, Ability, Pokemon)
+FETCHABLE_TYPES = (Berry, BerryFirmness, BerryFlavor, ContestType, EncounterMethod, EncounterCondition, Ability,
+                   Pokemon)
 NAMELESS_TYPES = (ContestEffect, SuperContestEffect)
 
 

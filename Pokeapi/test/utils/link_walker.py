@@ -9,8 +9,7 @@ class LinkWalker:
     def assert_links_exist(self, fields: dict):
         for name, value in fields.items():
             if type(value) is list:
-                for entry in value:
-                    self.assert_links_exist(entry)
+                [self.assert_links_exist(entry) for entry in value]
             elif type(value) is dict:
                 self.assert_links_exist(value)
             elif name is "url":
