@@ -9,13 +9,14 @@ from models.berry_flavor import BerryFlavor
 from models.contest_effect import ContestEffect
 from models.contest_type import ContestType
 from models.pokemon import Pokemon
+from models.super_contest_effect import SuperContestEffect
 from utils.api_client import PokeApiClient, TypedPokeApiClient, TypedNamelessPokeApiClient
 from utils.link_walker import LinkWalker
 from utils.timer import Timer
 
 
 FETCHABLE_TYPES = (Berry, BerryFirmness, BerryFlavor, ContestType, Ability, Pokemon)
-NAMELESS_TYPES = (ContestEffect,)
+NAMELESS_TYPES = (ContestEffect, SuperContestEffect)
 
 
 @pytest.fixture
