@@ -44,3 +44,8 @@ class NamedListResult(BaseModel):
 class FlavorText(BaseModel):
     flavor_text: str
     language: NamedApiResource
+
+
+class Description(BaseModel):
+    description: str
+    language: NamedApiResource
