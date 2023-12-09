@@ -13,6 +13,7 @@ from models.encounter_condition_value import EncounterConditionValue
 from models.encounter_method import EncounterMethod
 from models.evolution_chain import EvolutionChain
 from models.evolution_trigger import EvolutionTrigger
+from models.generation import Generation
 from models.pokemon import Pokemon
 from models.super_contest_effect import SuperContestEffect
 from utils.api_client import PokeApiClient, TypedPokeApiClient, TypedNamelessPokeApiClient
@@ -21,7 +22,7 @@ from utils.timer import Timer
 
 
 FETCHABLE_TYPES = (Berry, BerryFirmness, BerryFlavor, ContestType, EncounterMethod, EncounterCondition,
-                   EncounterConditionValue, EvolutionTrigger, Ability, Pokemon)
+                   EncounterConditionValue, EvolutionTrigger, Generation, Ability, Pokemon)
 NAMELESS_TYPES = (ContestEffect, SuperContestEffect, EvolutionChain)
 
 
