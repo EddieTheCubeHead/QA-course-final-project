@@ -14,6 +14,7 @@ from models.encounter_method import EncounterMethod
 from models.evolution_chain import EvolutionChain
 from models.evolution_trigger import EvolutionTrigger
 from models.generation import Generation
+from models.item import Item
 from models.pokedex import Pokedex
 from models.pokemon import Pokemon
 from models.super_contest_effect import SuperContestEffect
@@ -25,7 +26,7 @@ from utils.timer import Timer
 
 
 FETCHABLE_TYPES = (Berry, BerryFirmness, BerryFlavor, ContestType, EncounterMethod, EncounterCondition,
-                   EncounterConditionValue, EvolutionTrigger, Generation, Pokedex, Version, VersionGroup, Ability,
+                   EncounterConditionValue, EvolutionTrigger, Generation, Pokedex, Version, VersionGroup, Item, Ability,
                    Pokemon)
 NAMELESS_TYPES = (ContestEffect, SuperContestEffect, EvolutionChain)
 

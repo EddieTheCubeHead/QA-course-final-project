@@ -15,5 +15,5 @@ class Pokedex(Fetchable):
     descriptions: list[Description]
     names: list[Name]
     pokemon_entries: list[PokemonEntry]
-    region: NamedApiResource
+    region: NamedApiResource | None
     version_groups: list[NamedApiResource]

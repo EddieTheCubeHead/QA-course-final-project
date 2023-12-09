@@ -49,3 +49,19 @@ class FlavorText(BaseModel):
 class Description(BaseModel):
     description: str
     language: NamedApiResource
+
+
+class VersionGroupFlavorText(BaseModel):
+    text: str
+    language: NamedApiResource
+    version_group: NamedApiResource
+
+
+class GenerationGameIndex(BaseModel):
+    game_index: int
+    generation: NamedApiResource
+
+
+class MachineVersionDetail(BaseModel):
+    machine: ApiResource
+    version_group: NamedApiResource
