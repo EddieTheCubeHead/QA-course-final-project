@@ -2,8 +2,8 @@ import os
 
 import pytest
 
-from conftest import FETCHABLE_TYPES
-from utils.api_client import TypedPokeApiClient
+from conftest import FETCHABLE_TYPES, NAMELESS_TYPES
+from utils.api_client import TypedPokeApiClient, TypedNamelessPokeApiClient
 from utils.link_walker import LinkWalker
 
 
@@ -28,4 +28,23 @@ class ObjectFetchingFeatures:
     def should_have_functioning_links_to_other_resources(self, typed_client: TypedPokeApiClient,
                                                          link_walker: LinkWalker):
         fetchable_object = typed_client.get_typed(typed_client.get_random_name())
+        link_walker.assert_links_exist(fetchable_object.model_dump())
+
+
+# noinspection PyMethodMayBeStatic
+@pytest.mark.parametrize("nameless_client", NAMELESS_TYPES, indirect=True)
+class NamelessObjectFetchingFeatures:
+
+    def should_get_list_of_available_resources_if_no_identifier_given(self, nameless_client: TypedPokeApiClient):
+        results = nameless_client.get_all()
+        assert results is not None, f"Could not get a list of resources for route {nameless_client.route_name}"
+
+    def should_get_type_data_in_the_correct_model(self, nameless_client: TypedPokeApiClient):
+        resource_id = nameless_client.get_random_id()
+        nameless_client.get_typed(resource_id)
+
+    @pytest.mark.skipif(os.getenv("SKIP_LONG", default=None) is not None, reason="Skipped long test")
+    def should_have_functioning_links_to_other_resources(self, nameless_client: TypedNamelessPokeApiClient,
+                                                         link_walker: LinkWalker):
+        fetchable_object = nameless_client.get_typed(nameless_client.get_random_id())
         link_walker.assert_links_exist(fetchable_object.model_dump())

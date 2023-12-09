@@ -6,14 +6,16 @@ from models.ability import Ability
 from models.berry import Berry
 from models.berry_firmness import BerryFirmness
 from models.berry_flavor import BerryFlavor
+from models.contest_effect import ContestEffect
 from models.contest_type import ContestType
 from models.pokemon import Pokemon
-from utils.api_client import PokeApiClient, TypedPokeApiClient
+from utils.api_client import PokeApiClient, TypedPokeApiClient, TypedNamelessPokeApiClient
 from utils.link_walker import LinkWalker
 from utils.timer import Timer
 
 
 FETCHABLE_TYPES = (Berry, BerryFirmness, BerryFlavor, ContestType, Ability, Pokemon)
+NAMELESS_TYPES = (ContestEffect,)
 
 
 @pytest.fixture
@@ -26,6 +28,12 @@ def api_client() -> PokeApiClient:
 def typed_client(request) -> TypedPokeApiClient:
     api_url = os.getenv("POKEAPI_URL", "https://pokeapi.co/api/v2/")
     return TypedPokeApiClient(api_url, request.param)
+
+
+@pytest.fixture(scope="class")
+def nameless_client(request) -> TypedNamelessPokeApiClient:
+    api_url = os.getenv("POKEAPI_URL", "https://pokeapi.co/api/v2/")
+    return TypedNamelessPokeApiClient(api_url, request.param)
 
 
 @pytest.fixture

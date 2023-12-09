@@ -6,7 +6,7 @@ import random
 import pytest
 import aiohttp
 
-from conftest import Timer, FETCHABLE_TYPES
+from conftest import Timer, FETCHABLE_TYPES, NAMELESS_TYPES
 from utils.api_client import TypedPokeApiClient
 
 
@@ -35,4 +35,27 @@ class PerformanceFeatures:
         typed_client.reset_all_instances_cache()
         with timer:
             typed_client.get_all()
+        assert timer < datetime.timedelta(seconds=5)
+
+
+# noinspection PyMethodMayBeStatic
+@pytest.mark.skipif("127.0.0.1" not in os.getenv("POKEAPI_URL", default="false"),
+                    reason="Only run stress test against proxy to not overstress Pokeapi servers")
+@pytest.mark.parametrize("nameless_client", NAMELESS_TYPES, indirect=True)
+class NamelessTypePerformanceFeatures:
+
+    @pytest.mark.skipif(os.getenv("SKIP_LONG", default=None) is not None, reason="Skipped long test")
+    async def should_handle_thousand_requests_for_type_instance_in_ten_seconds(self, nameless_client: TypedPokeApiClient,
+                                                                               timer: Timer):
+        async with aiohttp.ClientSession() as session:
+            with timer:
+                async with asyncio.TaskGroup() as task_group:
+                    [task_group.create_task(nameless_client.get_typed_async(session, nameless_client.get_random_id()))
+                     for _ in range(1000)]
+        assert timer < datetime.timedelta(seconds=10)
+
+    async def should_get_all_resources_of_type_in_five_seconds(self, nameless_client: TypedPokeApiClient, timer: Timer):
+        nameless_client.reset_all_instances_cache()
+        with timer:
+            nameless_client.get_all()
         assert timer < datetime.timedelta(seconds=5)
