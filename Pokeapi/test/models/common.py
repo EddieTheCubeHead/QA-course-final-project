@@ -1,4 +1,8 @@
+from typing import TypeVar, Generic
+
 from pydantic import BaseModel
+
+from models.fetchable import Fetchable
 
 
 class NamedApiResource(BaseModel):
@@ -18,3 +22,10 @@ class Effect(BaseModel):
 
 class VerboseEffect(Effect):
     short_effect: str
+
+
+class ListResult(BaseModel):
+    count: int
+    next: str | None
+    previous: str | None
+    results: list[NamedApiResource]
