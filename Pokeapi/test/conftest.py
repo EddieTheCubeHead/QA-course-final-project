@@ -11,6 +11,7 @@ from models.contest_type import ContestType
 from models.encounter_condition import EncounterCondition
 from models.encounter_condition_value import EncounterConditionValue
 from models.encounter_method import EncounterMethod
+from models.evolution_chain import EvolutionChain
 from models.pokemon import Pokemon
 from models.super_contest_effect import SuperContestEffect
 from utils.api_client import PokeApiClient, TypedPokeApiClient, TypedNamelessPokeApiClient
@@ -20,7 +21,7 @@ from utils.timer import Timer
 
 FETCHABLE_TYPES = (Berry, BerryFirmness, BerryFlavor, ContestType, EncounterMethod, EncounterCondition,
                    EncounterConditionValue, Ability, Pokemon)
-NAMELESS_TYPES = (ContestEffect, SuperContestEffect)
+NAMELESS_TYPES = (ContestEffect, SuperContestEffect, EvolutionChain)
 
 
 @pytest.fixture
