@@ -21,6 +21,7 @@ from models.item_fling_effect import ItemFlingEffect
 from models.item_pocket import ItemPocket
 from models.location import Location
 from models.location_area import LocationArea
+from models.pal_park_area import PalParkArea
 from models.pokedex import Pokedex
 from models.pokemon import Pokemon
 from models.super_contest_effect import SuperContestEffect
@@ -33,7 +34,8 @@ from utils.timer import Timer
 
 FETCHABLE_TYPES = (Berry, BerryFirmness, BerryFlavor, ContestType, EncounterMethod, EncounterCondition,
                    EncounterConditionValue, EvolutionTrigger, Generation, Pokedex, Version, VersionGroup, Item,
-                   ItemAttribute, ItemCategory, ItemFlingEffect, ItemPocket, Location, LocationArea, Ability, Pokemon)
+                   ItemAttribute, ItemCategory, ItemFlingEffect, ItemPocket, Location, LocationArea, PalParkArea,
+                   Ability, Pokemon)
 NAMELESS_TYPES = (ContestEffect, SuperContestEffect, EvolutionChain)
 
 
