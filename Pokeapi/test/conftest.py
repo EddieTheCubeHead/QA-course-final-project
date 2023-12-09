@@ -5,13 +5,14 @@ import pytest
 from models.ability import Ability
 from models.berry import Berry
 from models.berry_firmness import BerryFirmness
+from models.berry_flavor import BerryFlavor
 from models.pokemon import Pokemon
 from utils.api_client import PokeApiClient, TypedPokeApiClient
 from utils.link_walker import LinkWalker
 from utils.timer import Timer
 
 
-FETCHABLE_TYPES = (Berry, BerryFirmness, Ability, Pokemon)
+FETCHABLE_TYPES = (Berry, BerryFirmness, BerryFlavor, Ability, Pokemon)
 
 
 @pytest.fixture

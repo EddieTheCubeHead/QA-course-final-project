@@ -1,5 +1,3 @@
-from pydantic import BaseModel
-
 from models.common import NamedApiResource, Name
 from models.fetchable import Fetchable
 
