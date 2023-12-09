@@ -18,13 +18,15 @@ from models.pokedex import Pokedex
 from models.pokemon import Pokemon
 from models.super_contest_effect import SuperContestEffect
 from models.version import Version
+from models.version_group import VersionGroup
 from utils.api_client import PokeApiClient, TypedPokeApiClient, TypedNamelessPokeApiClient
 from utils.link_walker import LinkWalker
 from utils.timer import Timer
 
 
 FETCHABLE_TYPES = (Berry, BerryFirmness, BerryFlavor, ContestType, EncounterMethod, EncounterCondition,
-                   EncounterConditionValue, EvolutionTrigger, Generation, Pokedex, Version, Ability, Pokemon)
+                   EncounterConditionValue, EvolutionTrigger, Generation, Pokedex, Version, VersionGroup, Ability,
+                   Pokemon)
 NAMELESS_TYPES = (ContestEffect, SuperContestEffect, EvolutionChain)
 
 
