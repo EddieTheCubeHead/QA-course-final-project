@@ -2,6 +2,7 @@ import os
 
 import pytest
 
+from models.pokemon.Nature import Nature
 from models.pokemon.ability import Ability
 from models.berries.berry import Berry
 from models.berries.berry_firmness import BerryFirmness
@@ -48,7 +49,7 @@ FETCHABLE_TYPES = (Berry, BerryFirmness, BerryFlavor, ContestType, EncounterMeth
                    EncounterConditionValue, EvolutionTrigger, Generation, Pokedex, Version, VersionGroup, Item,
                    ItemAttribute, ItemCategory, ItemFlingEffect, ItemPocket, Location, LocationArea, PalParkArea,
                    Region, Move, MoveAilment, MoveCategory, MoveDamageClass, MoveLearnMethod, MoveTarget, Ability,
-                   EggGroup, Gender, GrowthRate, Pokemon)
+                   EggGroup, Gender, GrowthRate, Nature, Pokemon)
 NAMELESS_TYPES = (ContestEffect, SuperContestEffect, EvolutionChain, Machine, Characteristic)
 
 
