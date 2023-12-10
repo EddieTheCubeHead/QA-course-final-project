@@ -42,6 +42,7 @@ def should_convert_csv_to_json(cli_runner: cli_runner_wrapper, schemas: {str: st
     result = cli_runner('parse', f'--schema', csv_schema, data_file_path, '-I', 'json').stdout
     file_data = File.model_validate_json(result)
     records = file_data.file.record
+    assert len(records) == 3
     assert records[0].item[0] == "smith"
     assert records[1].item[1] == "john"
 
@@ -50,10 +51,25 @@ def should_unparse_csv_to_xml(cli_runner: cli_runner_wrapper, schemas: {str: str
                               data_output_directory: str):
     csv_schema = schemas["csv"]
     data_file_path = data_files["basic.csv"]
-    xml_output_path = os.path.join(data_output_directory, "test.xml")
-    csv_output_path = os.path.join(data_output_directory, "test.csv")
+    xml_output_path = os.path.join(data_output_directory, "output.xml")
+    csv_output_path = os.path.join(data_output_directory, "output.csv")
     cli_runner('parse', f'--schema', csv_schema, data_file_path, '-o', xml_output_path,  '-I', 'xml')
     cli_runner('unparse', f'--schema', csv_schema, xml_output_path, '-o', csv_output_path, '-I', 'xml')
+
+    with open(csv_output_path, 'r', newline='') as output_file, open(data_file_path, 'r', newline='') as expected_file:
+        generated_content = output_file.read().replace('\r\n', '\n')
+        expected_content = expected_file.read().replace('\r\n', '\n')
+    assert generated_content == expected_content
+
+
+def should_unparse_csv_to_json(cli_runner: cli_runner_wrapper, schemas: {str: str}, data_files: {str: str},
+                              data_output_directory: str):
+    csv_schema = schemas["csv"]
+    data_file_path = data_files["basic.csv"]
+    json_output_path = os.path.join(data_output_directory, "output.json")
+    csv_output_path = os.path.join(data_output_directory, "output.csv")
+    cli_runner('parse', f'--schema', csv_schema, data_file_path, '-o', json_output_path,  '-I', 'json')
+    cli_runner('unparse', f'--schema', csv_schema, json_output_path, '-o', csv_output_path, '-I', 'json')
 
     with open(csv_output_path, 'r', newline='') as output_file, open(data_file_path, 'r', newline='') as expected_file:
         generated_content = output_file.read().replace('\r\n', '\n')
