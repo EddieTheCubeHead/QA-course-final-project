@@ -46,6 +46,7 @@ from models.pokemon.pokemon_form import PokemonForm
 from models.pokemon.pokemon_habitat import PokemonHabitat
 from models.pokemon.pokemon_location_area import PokemonLocationAreaList
 from models.pokemon.pokemon_shape import PokemonShape
+from models.pokemon.pokemon_species import PokemonSpecies
 from utils.api_client import PokeApiClient, TypedPokeApiClient, TypedNamelessPokeApiClient
 from utils.link_walker import LinkWalker
 from utils.timer import Timer
@@ -56,7 +57,7 @@ FETCHABLE_TYPES = (Berry, BerryFirmness, BerryFlavor, ContestType, EncounterMeth
                    ItemAttribute, ItemCategory, ItemFlingEffect, ItemPocket, Location, LocationArea, PalParkArea,
                    Region, Move, MoveAilment, MoveCategory, MoveDamageClass, MoveLearnMethod, MoveTarget, Ability,
                    EggGroup, Gender, GrowthRate, Nature, PokeathlonStat, Pokemon, PokemonColor, PokemonForm,
-                   PokemonHabitat, PokemonShape)
+                   PokemonHabitat, PokemonShape, PokemonSpecies)
 NAMELESS_TYPES = (ContestEffect, SuperContestEffect, EvolutionChain, Machine, Characteristic, PokemonLocationAreaList)
 
 
