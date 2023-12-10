@@ -1,10 +1,12 @@
 import json
 import csv
 import os
-import xml.etree.ElementTree as ET
+from xml.etree import ElementTree
+
 from models import File, RecordData
 
 from conftest import cli_runner_wrapper
+
 
 def should_print_version_when_version_argument_supplied(cli_runner: cli_runner_wrapper):
     result = cli_runner("--version")
@@ -15,12 +17,14 @@ def should_print_error_if_ran_without_args(cli_runner: cli_runner_wrapper):
     result = cli_runner()
     assert result.stderr == "[error] Subcommand required"
 
+
 def should_convert_csv_to_xml(cli_runner: cli_runner_wrapper, schemas: {str: str}, data_files: {str: str}):
     csv_schema = schemas["csv"]
     data_file_path = data_files["basic.csv"]
-    result = cli_runner('parse',f'--schema', csv_schema, data_file_path, '-I', 'xml').stdout
+    result = cli_runner('parse', f'--schema', csv_schema, data_file_path, '-I', 'xml').stdout
     
-    parsed_xml = ET.fromstring(result)
+    parsed_xml = ElementTree.fromstring(result)
+    # noinspection HttpUrlsUsage
     assert parsed_xml.tag == '{http://example.com}file'
     assert len(parsed_xml.findall('header/title')) == 4
     assert len(parsed_xml.findall('record')) == 3
@@ -36,21 +40,21 @@ def should_convert_csv_to_xml(cli_runner: cli_runner_wrapper, schemas: {str: str
 def should_convert_csv_to_json(cli_runner: cli_runner_wrapper, schemas: {str: str}, data_files: {str: str}):
     csv_schema = schemas["csv"]
     data_file_path = data_files["basic.csv"]
-    result = json.loads(cli_runner('parse',f'--schema', csv_schema, data_file_path, '-I', 'json').stdout)
+    result = json.loads(cli_runner('parse', f'--schema', csv_schema, data_file_path, '-I', 'json').stdout)
     file_data = File(**result)
     records = file_data.file.record
     assert records[0].item[0] == "smith"
     assert records[1].item[1] == "john"
-    # assert result == {'file': {'header': {'title': ['last', 'first', 'middle', 'DOB']}, 'record': [{'item': ['smith', 'robert', 'brandon', '1988-03-24']}, {'item': ['johnson', 'john', 'henry', '1986-01-23']}]}}
 
 
-def should_unparse_csv_to_xml(cli_runner: cli_runner_wrapper, schemas: {str: str}, data_files: {str: str}, data_output_directory: str):
+def should_unparse_csv_to_xml(cli_runner: cli_runner_wrapper, schemas: {str: str}, data_files: {str: str},
+                              data_output_directory: str):
     csv_schema = schemas["csv"]
     data_file_path = data_files["basic.csv"]
     xml_output_path = os.path.join(data_output_directory, "test.xml")
     csv_output_path = os.path.join(data_output_directory, "test.csv")
-    cli_runner('parse',f'--schema', csv_schema, data_file_path, '-o', xml_output_path,  '-I', 'xml')
-    cli_runner('unparse',f'--schema', csv_schema, xml_output_path, '-o', csv_output_path, '-I', 'xml')
+    cli_runner('parse', f'--schema', csv_schema, data_file_path, '-o', xml_output_path,  '-I', 'xml')
+    cli_runner('unparse', f'--schema', csv_schema, xml_output_path, '-o', csv_output_path, '-I', 'xml')
 
     with open(csv_output_path, 'r', newline='') as output_file, open(data_file_path, 'r', newline='') as expected_file:
         generated_content = output_file.read().replace('\r\n', '\n')
@@ -62,9 +66,8 @@ def should_convert_csv_to_json_csvlib(cli_runner: cli_runner_wrapper, schemas: {
     
     csv_schema = schemas["csv"]
     data_file_path = data_files["basic.csv"]
-    
 
-    result = json.loads(cli_runner('parse',f'--schema', csv_schema, data_file_path, '-I', 'json').stdout)
+    result = json.loads(cli_runner('parse', f'--schema', csv_schema, data_file_path, '-I', 'json').stdout)
     file_data = File(**result)
     records = file_data.file.record
     with open(data_file_path) as f:
