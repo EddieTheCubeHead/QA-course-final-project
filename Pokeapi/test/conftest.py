@@ -30,7 +30,8 @@ from models.moves.move_learn_method import MoveLearnMethod
 from models.moves.move_target import MoveTarget
 from models.locations.pal_park_area import PalParkArea
 from models.games.pokedex import Pokedex
-from models.pokemon import Pokemon
+from models.pokemon.characteristic import Characteristic
+from models.pokemon.pokemon import Pokemon
 from models.locations.region import Region
 from models.contests.super_contest_effect import SuperContestEffect
 from models.games.version import Version
@@ -45,7 +46,7 @@ FETCHABLE_TYPES = (Berry, BerryFirmness, BerryFlavor, ContestType, EncounterMeth
                    ItemAttribute, ItemCategory, ItemFlingEffect, ItemPocket, Location, LocationArea, PalParkArea,
                    Region, Move, MoveAilment, MoveCategory, MoveDamageClass, MoveLearnMethod, MoveTarget, Ability,
                    Pokemon)
-NAMELESS_TYPES = (ContestEffect, SuperContestEffect, EvolutionChain, Machine)
+NAMELESS_TYPES = (ContestEffect, SuperContestEffect, EvolutionChain, Machine, Characteristic)
 
 
 @pytest.fixture
