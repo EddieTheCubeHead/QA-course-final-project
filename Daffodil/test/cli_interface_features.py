@@ -1,4 +1,3 @@
-import json
 import csv
 import os
 from xml.etree import ElementTree
@@ -40,8 +39,8 @@ def should_convert_csv_to_xml(cli_runner: cli_runner_wrapper, schemas: {str: str
 def should_convert_csv_to_json(cli_runner: cli_runner_wrapper, schemas: {str: str}, data_files: {str: str}):
     csv_schema = schemas["csv"]
     data_file_path = data_files["basic.csv"]
-    result = json.loads(cli_runner('parse', f'--schema', csv_schema, data_file_path, '-I', 'json').stdout)
-    file_data = File(**result)
+    result = cli_runner('parse', f'--schema', csv_schema, data_file_path, '-I', 'json').stdout
+    file_data = File.model_validate_json(result)
     records = file_data.file.record
     assert records[0].item[0] == "smith"
     assert records[1].item[1] == "john"
@@ -67,8 +66,8 @@ def should_convert_csv_to_json_csvlib(cli_runner: cli_runner_wrapper, schemas: {
     csv_schema = schemas["csv"]
     data_file_path = data_files["basic.csv"]
 
-    result = json.loads(cli_runner('parse', f'--schema', csv_schema, data_file_path, '-I', 'json').stdout)
-    file_data = File(**result)
+    result = cli_runner('parse', f'--schema', csv_schema, data_file_path, '-I', 'json').stdout
+    file_data = File.model_validate_json(result)
     records = file_data.file.record
     with open(data_file_path) as f:
         reader = csv.DictReader(f)
