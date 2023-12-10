@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 
-from models.ability import AbilityEffectChange
+from models.pokemon.ability import AbilityEffectChange
 from models.common import NamedApiResource, ApiResource, VerboseEffect, Name, MachineVersionDetail
 from models.fetchable import Fetchable
 
