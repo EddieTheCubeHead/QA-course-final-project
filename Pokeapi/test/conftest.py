@@ -41,6 +41,7 @@ from models.locations.region import Region
 from models.contests.super_contest_effect import SuperContestEffect
 from models.games.version import Version
 from models.games.version_group import VersionGroup
+from models.pokemon.pokemon_colors import PokemonColor
 from models.pokemon.pokemon_location_area import PokemonLocationAreaList
 from utils.api_client import PokeApiClient, TypedPokeApiClient, TypedNamelessPokeApiClient
 from utils.link_walker import LinkWalker
@@ -51,7 +52,7 @@ FETCHABLE_TYPES = (Berry, BerryFirmness, BerryFlavor, ContestType, EncounterMeth
                    EncounterConditionValue, EvolutionTrigger, Generation, Pokedex, Version, VersionGroup, Item,
                    ItemAttribute, ItemCategory, ItemFlingEffect, ItemPocket, Location, LocationArea, PalParkArea,
                    Region, Move, MoveAilment, MoveCategory, MoveDamageClass, MoveLearnMethod, MoveTarget, Ability,
-                   EggGroup, Gender, GrowthRate, Nature, PokeathlonStat, Pokemon)
+                   EggGroup, Gender, GrowthRate, Nature, PokeathlonStat, Pokemon, PokemonColor)
 NAMELESS_TYPES = (ContestEffect, SuperContestEffect, EvolutionChain, Machine, Characteristic, PokemonLocationAreaList)
 
 
