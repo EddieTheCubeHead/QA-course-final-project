@@ -5,7 +5,6 @@ from typing import Callable
 
 import pytest
 
-
 _ROOT_PATH = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -65,4 +64,3 @@ def data_output_directory() -> str:
     _clean_directory(data_file_path)
     yield data_file_path
     _clean_directory(data_file_path)
-
