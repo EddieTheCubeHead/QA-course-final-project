@@ -1,9 +1,10 @@
 import csv
 import os
+
+import pytest
 from xml.etree import ElementTree
 
 from models import File, RecordData
-
 from conftest import cli_runner_wrapper
 
 

@@ -1,7 +1,9 @@
 import os
+import csv
 import subprocess
 from dataclasses import dataclass
 from typing import Callable
+from faker import Faker
 
 import pytest
 
@@ -66,3 +68,18 @@ def data_output_directory() -> str:
     yield data_file_path
     _clean_directory(data_file_path)
 
+@pytest.fixture
+def generate_test_file(args) -> None:
+    fake = Faker(args[0]) # en_US, jp_JP
+    with open(os.path.join(_ROOT_PATH, 'data\\data_files\\test_data.csv'), "w", newline='') as f:
+        fieldnames = ["username", "name", "sex", "mail"]
+        writer = csv.DictWriter(f, fieldnames)
+        writer.writeheader()
+        for _ in range(100000):
+            profile = fake.simple_profile()
+            writer.writerow({"username": profile["username"],
+                             "name": profile["name"],
+                             "sex": profile["sex"],
+                             "mail": profile["mail"]})
+
+            
