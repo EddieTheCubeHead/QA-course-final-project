@@ -1,0 +1,39 @@
+
+{
+    "file": {
+    "header": {
+      "title": [
+        "last",
+        "first",
+        "middle",
+        "DOB"
+      ]
+    },
+    "record": [
+      {
+        "item": [
+          "smith",
+          "robert",
+          "brandon",
+          "1988-03-24"
+        ]
+      }
+      {
+        "item": [
+          "johnson",
+          "john",
+          "henry",
+          "1986-01-23"
+        ]
+      },
+      {
+        "item": [
+          "jones",
+          "arya",
+          "cat",
+          "1986-02-19"
+        ]
+      }
+    ]
+  }
+}
