@@ -26,6 +26,7 @@ from models.move import Move
 from models.move_ailment import MoveAilment
 from models.move_category import MoveCategory
 from models.move_damage_class import MoveDamageClass
+from models.move_learn_method import MoveLearnMethod
 from models.pal_park_area import PalParkArea
 from models.pokedex import Pokedex
 from models.pokemon import Pokemon
@@ -41,7 +42,7 @@ from utils.timer import Timer
 FETCHABLE_TYPES = (Berry, BerryFirmness, BerryFlavor, ContestType, EncounterMethod, EncounterCondition,
                    EncounterConditionValue, EvolutionTrigger, Generation, Pokedex, Version, VersionGroup, Item,
                    ItemAttribute, ItemCategory, ItemFlingEffect, ItemPocket, Location, LocationArea, PalParkArea,
-                   Region, Move, MoveAilment, MoveCategory, MoveDamageClass, Ability, Pokemon)
+                   Region, Move, MoveAilment, MoveCategory, MoveDamageClass, MoveLearnMethod, Ability, Pokemon)
 NAMELESS_TYPES = (ContestEffect, SuperContestEffect, EvolutionChain, Machine)
 
 
