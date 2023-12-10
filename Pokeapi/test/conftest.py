@@ -33,6 +33,7 @@ from models.games.pokedex import Pokedex
 from models.pokemon.characteristic import Characteristic
 from models.pokemon.egg_group import EggGroup
 from models.pokemon.gender import Gender
+from models.pokemon.growth_rate import GrowthRate
 from models.pokemon.pokemon import Pokemon
 from models.locations.region import Region
 from models.contests.super_contest_effect import SuperContestEffect
@@ -47,7 +48,7 @@ FETCHABLE_TYPES = (Berry, BerryFirmness, BerryFlavor, ContestType, EncounterMeth
                    EncounterConditionValue, EvolutionTrigger, Generation, Pokedex, Version, VersionGroup, Item,
                    ItemAttribute, ItemCategory, ItemFlingEffect, ItemPocket, Location, LocationArea, PalParkArea,
                    Region, Move, MoveAilment, MoveCategory, MoveDamageClass, MoveLearnMethod, MoveTarget, Ability,
-                   EggGroup, Gender, Pokemon)
+                   EggGroup, Gender, GrowthRate, Pokemon)
 NAMELESS_TYPES = (ContestEffect, SuperContestEffect, EvolutionChain, Machine, Characteristic)
 
 
