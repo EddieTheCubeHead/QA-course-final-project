@@ -57,10 +57,12 @@ def should_convert_empty_csv_to_json(cli_runner: cli_runner_wrapper, schemas: {s
     result = cli_runner('parse', f'--schema', csv_schema, data_file_path, '-I', 'json').stdout
     assert not result
 
+
 def should_unparse_empty_json_to_csv(cli_runner: cli_runner_wrapper, schemas: {str: str}):
     csv_schema = schemas["csv"]
     result = cli_runner('unparse', f'--schema', csv_schema, '{}', '-I', 'json').stdout
     assert not result
+
 
 def should_not_unparse_invalid_json_to_csv(cli_runner: cli_runner_wrapper, schemas: {str: str}, data_files: {str: str}, data_output_directory: str):
     csv_schema = schemas["csv"]

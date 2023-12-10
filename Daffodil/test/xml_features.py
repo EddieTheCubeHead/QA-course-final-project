@@ -47,11 +47,21 @@ def should_convert_empty_csv_to_xml(cli_runner: cli_runner_wrapper, schemas: {st
     assert not result
 
 
-
 def should_unparse_empty_xml_to_csv(cli_runner: cli_runner_wrapper, schemas: {str: str}):
     csv_schema = schemas["csv"]
     xml_string = ET.tostring(ET.Element("root"), encoding="unicode", method="xml")
     result = cli_runner('unparse', f'--schema', csv_schema, xml_string, '-I', 'xml').stdout
     assert not result
     
-    
+
+def should_not_unparse_invalid_xml_to_csv(cli_runner: cli_runner_wrapper, schemas: {str: str}, data_files: {str: str}, data_output_directory: str):
+    csv_schema = schemas["csv"]
+    data_file_path = data_files["basic.csv"]
+    invalid_xml_path = data_files["invalid.xml"]
+    csv_output_path = os.path.join(data_output_directory, "output.csv")
+    cli_runner('unparse', f'--schema', csv_schema, invalid_xml_path, '-o', csv_output_path, '-I', 'xml')
+
+    with open(csv_output_path, 'r', newline='') as output_file, open(data_file_path, 'r', newline='') as expected_file:
+        generated_content = output_file.read().replace('\r\n', '\n')
+        expected_content = expected_file.read().replace('\r\n', '\n')
+    assert generated_content != expected_content
